@@ -100,16 +100,11 @@ library(summarytools)
 
 								</p>
 								<h3><u>Univariate and Multivariate Regression Models of Survival</u></h3>
-								<p> To assess the predictive value of a single variable on survival, univariate analyses can be used. In the simplistic model below, I evaluated the impact of four variables (tumor 
-									regression grade, nodal stage, and race) on survival. The multivariate regression shows that...
+								<p> To assess the predictive value of a single variable on survival, univariate analyses can be used. In the model below, I evaluated the impact of several variables on survival in gastric cancer patients after systemic treatment. The multivariate regression shows that while variables like tumor regression grade
+									(TRG) and age seemed to be significant on univariate analysis, they were kicked out of significance when accounting for covariates. This is an important distinction when
+									trying to identify true associations to subsequently test for causation in prospective studies.
 								</p>
-								<span class="image main"><img src="images/uva.png" alt="" /></span>
-								<p> Yet, it is possible that some of these variables are only significant due to their tight correlation with another variable. In this case,
-									we want to identfiy the driver variable which is changing our hazard ratio. Through a multivariate regression model, we can see that
-									only <b>nodal status</b> remains <i>independently predictive</i>, implying that the other two variables were predictive simply due to their
-									association with nodal status.
-								</p>
-								<span class="image main"><img src="images/mva.png" alt="" /></span>
+								<span class="image main"><img src="images/coxregression.png" alt="" /></span>
 								<h3><u>Forest Plot for Multivariate Regression Model Visualization</u></h3>
 								<p> IMAGE BELOW
 
