@@ -118,9 +118,14 @@ library(summarytools)
 								<span class="image main"><img src="images/testkmgraph.png" alt="" /></span>
 								<br>
 								<h3><u>Receiver Operating Characteristics Curve for Model Fit Accuracy</u></h3>
-								<p> IMAGE BELOW
-
+								<p> One method to compare two models is by generating a receiver operating characteristics (ROC) curve.
+									The higher the area under this curve (AUC), the more accurate a univariate model at predicting a binary endpoint. Below, I have implemented a
+									time-dependent ROC to evaluate how accurate lymph node ratio (LNR; # metastatic nodes / total resected nodes) versus purely # of metastatic (positive) lymph nodes are in predicting
+									time-to-event data (survival outcomes). The results were statistically significant (p = 0.007; AUC 66.6 vs. 71.2), indicating that LNR
+									was significantly a better predictor of survival than # metastatic nodes.
 								</p>
+								<span class="image main"><img src="images/roccurve.png" alt="" /></span>
+
 								<h3><u>Volcano Plot for Relative Enrichment Visualization</u></h3>
 								<p> IMAGE BELOW
 
