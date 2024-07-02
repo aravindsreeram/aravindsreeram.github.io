@@ -96,9 +96,15 @@ library(summarytools)
 								<span class="image main"><img src="images/PortfolioTable2.png" alt="" /></span>
 							
 								<h3><u>Logistic Regression Model</u></h3>
-								<p> IMAGE BELOW
-
+								<p> To search for variables that significantly increase or decrease the likelihood of a binary outcome, logistic regression
+									models are used. For example, I've defined a high lymph node ratio (LNR; # metastatic nodes / total resected nodes) = 0.07 in my dataset of
+									390 gastric cancer patients. By running a logistic regression model, I discovered that diffuse and mixed subtypes (compared to intestinal),
+									as well as poor chemotherapy response as shown by tumor regression grade, were predictors of having high LNR. <br> It is important to keep in mind that
+									in this case, a continuous variable was dichotomized for demonstrative purposes. In reality, continuous variables are better suited
+									for <b>linear regression</b> models, which follow an extremely similar format and as such I've chosen not to separately showcase here.
 								</p>
+								<span class="image main"><img src="images/logistic_lnr.png" alt="" /></span>
+
 								<h3><u>Univariate and Multivariate Regression Models of Survival</u></h3>
 								<p> To assess the predictive value of a single variable on survival, univariate analyses can be used. In the model below, I evaluated the impact of several variables on survival in gastric cancer patients after systemic treatment. The multivariate regression shows that while variables like tumor regression grade
 									(TRG) and age seemed to be significant on univariate analysis, they were kicked out of significance when accounting for covariates. This is an important distinction when
