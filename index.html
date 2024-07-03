@@ -481,50 +481,66 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-    // Store the main content element
-    const mainContent = document.getElementById('main');
+    const main = document.getElementById('main');
+    const wrapper = document.getElementById('wrapper');
 
-    // Add click event to each button
-    const buttons = document.querySelectorAll('.data-analytics-buttons .button');
+    // Add click event to each button in the data analytics section
+    const buttons = document.querySelectorAll('#datasci .button');
     buttons.forEach(button => {
         button.addEventListener('click', function (e) {
             e.preventDefault();
-            const targetId = e.target.getAttribute('href').substring(1);
-            loadContent(targetId);
+            const targetId = this.getAttribute('href').substring(1);
+            showContent(targetId);
         });
     });
 
     // Handle browser back/forward buttons
     window.addEventListener('popstate', function (e) {
         if (e.state && e.state.id) {
-            loadContent(e.state.id, false);
+            showContent(e.state.id, false);
         }
     });
 
-    function loadContent(id, pushState = true) {
-        const targetElement = document.getElementById(id);
-        if (targetElement) {
-            // Hide all articles
-            const articles = mainContent.querySelectorAll('article');
-            articles.forEach(article => article.style.display = 'none');
+    function showContent(id, pushState = true) {
+        // Hide all articles
+        const articles = main.querySelectorAll('article');
+        articles.forEach(article => article.style.display = 'none');
 
-            // Show the target article
-            targetElement.style.display = 'block';
+        // Show the target article
+        const targetArticle = document.getElementById(id);
+        if (targetArticle) {
+            targetArticle.style.display = 'block';
+
+            // Add "Back to Data Analytics" button if not already present
+            if (id !== 'datasci' && !targetArticle.querySelector('.back-button')) {
+                const backButton = document.createElement('button');
+                backButton.textContent = 'Back to Data Analytics';
+                backButton.className = 'back-button';
+                backButton.addEventListener('click', function() {
+                    showContent('datasci');
+                });
+                targetArticle.insertBefore(backButton, targetArticle.firstChild);
+            }
 
             if (pushState) {
                 history.pushState({ id: id }, '', `#${id}`);
             }
 
-            // If we're loading a subpage, add a "Back to Data Analytics" button
-            if (id !== 'datasci') {
-                const backButton = document.createElement('button');
-                backButton.textContent = 'Back to Data Analytics';
-                backButton.addEventListener('click', function() {
-                    loadContent('datasci');
-                });
-                targetElement.insertBefore(backButton, targetElement.firstChild);
-            }
+            // Ensure the wrapper is visible
+            wrapper.classList.remove('is-article-visible');
+            setTimeout(() => {
+                wrapper.classList.add('is-article-visible');
+            }, 325);
         }
     }
+
+    // Handle clicks on the close button
+    const closeButtons = document.querySelectorAll('.close');
+    closeButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            wrapper.classList.remove('is-article-visible');
+        });
+    });
 });
 </script>
