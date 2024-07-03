@@ -477,3 +477,46 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 
 	</body>
 </html>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    // Add click event to each button
+    const buttons = document.querySelectorAll('.data-analytics-buttons .button');
+    buttons.forEach(button => {
+        button.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetPage = e.target.getAttribute('href');
+            history.pushState({ page: targetPage }, '', targetPage);
+            loadPage(targetPage);
+        });
+    });
+
+    // Handle browser back button
+    window.addEventListener('popstate', function (e) {
+        if (e.state && e.state.page) {
+            loadPage(e.state.page);
+        }
+    });
+
+    function loadPage(page) {
+        fetch(page)
+            .then(response => response.text())
+            .then(html => {
+                document.body.innerHTML = html;
+                window.scrollTo(0, 0);
+                // Reapply the event listeners after loading the new content
+                const newButtons = document.querySelectorAll('.data-analytics-buttons .button');
+                newButtons.forEach(button => {
+                    button.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        const targetPage = e.target.getAttribute('href');
+                        history.pushState({ page: targetPage }, '', targetPage);
+                        loadPage(targetPage);
+                    });
+                });
+            })
+            .catch(error => console.error('Error loading page:', error));
+    }
+});
+</script>
