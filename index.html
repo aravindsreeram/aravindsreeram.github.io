@@ -78,6 +78,8 @@
 						<!-- Data Analysis -->
 							<article id="datasci">
 								<h2 class="major">Data Analytics</h2>
+								<p>Below is a portfolio of selected analytical techniques I've implemented in past projects, many largely pertinent to outcomes analysis and cancer research. All output is generated using the R software, and this existing toolkit has allowed me to adapt quickly when projects call for new statistical/visualization methods.</p>
+
 								<!--<span class="image main"><img src="images/pic02.jpg" alt="" /></span>-->	
 									<ul class="actions">
 										<li><a href="#characteristics" class="button">Characteristics + Mean Comparisons</a></li><br>		
@@ -88,7 +90,6 @@
 								<ul class="actions">
 										<li><a href="#datavis" class="button">Data Visualizations</a></li>
 									</ul>
-								<p>Below is a portfolio of selected analytical techniques I've implemented in past projects, many largely pertinent to outcomes analysis and cancer research. All output is generated using the R software, and this existing toolkit has allowed me to adapt quickly when projects call for new statistical/visualization methods.</p>
 								<h3><u>Patient Characteristics Table Generation</u></h3>
 							<!--	<pre><code># Relevant packages:
 library(tidyverse)
@@ -97,42 +98,6 @@ library(readxl)
 library(summarytools)
 
 # Followed by data manipulation</code></pre>-->
-								<p> Real-world data from an institutional gastric cancer dataset of 398 patients post-chemotherapy. Patient characteristics are doubly-stratified,
-									first by Lauren pathologic type then by dichotomized lymph node ratio (high vs. low).</p>
-								<span class="image main"><img src="images/PortfolioTable1.png" alt="" /></span>
-						
-								<p>A common next step would be to compare low LNR vs. high LNR groups in the same dataset and test for statistical differences in means and distributions:</p>
-								<span class="image main"><img src="images/PortfolioTable2.png" alt="" /></span>
-							
-								<h3><u>Logistic Regression Model</u></h3>
-								<p> To search for variables that significantly increase or decrease the likelihood of a binary outcome, logistic regression
-									models are used. For example, I've defined a high lymph node ratio (LNR; # metastatic nodes / total resected nodes) = 0.07 in my dataset of
-									390 gastric cancer patients. By running a logistic regression model, I discovered that diffuse and mixed subtypes (compared to intestinal),
-									as well as poor chemotherapy response as shown by tumor regression grade, were predictors of having high LNR. <br> It is important to keep in mind that
-									in this case, a continuous variable was dichotomized for demonstrative purposes. In reality, continuous variables are better suited
-									for <b>linear regression</b> models, which follow an extremely similar format and as such I've chosen not to separately showcase here.
-								</p>
-								<span class="image main"><img src="images/logistic_lnr.png" alt="" /></span>
-
-								<h3><u>Univariate and Multivariate Regression Models of Survival</u></h3>
-								<p> To assess the predictive value of a single variable on survival, univariate analyses can be used. In the model below, I evaluated the impact of several variables on survival in gastric cancer patients after systemic treatment. The multivariate regression shows that while variables like tumor regression grade
-									(TRG) and age seemed to be significant on univariate analysis, they were kicked out of significance when accounting for covariates. This is an important distinction when
-									trying to identify true associations to subsequently test for causation in prospective studies.
-								</p>
-								<span class="image main"><img src="images/coxregression.png" alt="" /></span>
-								<h3><u>Forest Plot for Multivariate Regression Model Visualization</u></h3>
-								<p> A standard visualization for multivariate analysis is the forest plot, constructed below using the results from the earlier model:
-								</p>
-								<span class="image main"><img src="images/forestplot.png" alt="" /></span>
-
-								<h3><u>Kaplan-Meier Survival Curves with Log-Rank Test</u></h3>
-								<p> The Kaplan-Meier estimator is a common non-parametric statistic employed in survival analysis. In assessing oncologic outcomes,
-									time-to-event data (e.g. whether a death occurs and, if so, when) can be represented through survival curves like the ones below.
-									Here, I am comparing the overall survival of node-positive vs. node-negative gastric cancer patients and employing a logrank test to confirm a statistically significant difference (p < 0.001).
-								</p>
-								<span class="image main"><img src="images/testkmgraph.png" alt="" /></span>
-								<br>
-			
 							</article>
 
 						<!-- About -->
