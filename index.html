@@ -481,42 +481,50 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
+    // Store the main content element
+    const mainContent = document.getElementById('main');
+
     // Add click event to each button
     const buttons = document.querySelectorAll('.data-analytics-buttons .button');
     buttons.forEach(button => {
         button.addEventListener('click', function (e) {
             e.preventDefault();
-            const targetPage = e.target.getAttribute('href');
-            history.pushState({ page: targetPage }, '', targetPage);
-            loadPage(targetPage);
+            const targetId = e.target.getAttribute('href').substring(1);
+            loadContent(targetId);
         });
     });
 
-    // Handle browser back button
+    // Handle browser back/forward buttons
     window.addEventListener('popstate', function (e) {
-        if (e.state && e.state.page) {
-            loadPage(e.state.page);
+        if (e.state && e.state.id) {
+            loadContent(e.state.id, false);
         }
     });
 
-    function loadPage(page) {
-        fetch(page)
-            .then(response => response.text())
-            .then(html => {
-                document.body.innerHTML = html;
-                window.scrollTo(0, 0);
-                // Reapply the event listeners after loading the new content
-                const newButtons = document.querySelectorAll('.data-analytics-buttons .button');
-                newButtons.forEach(button => {
-                    button.addEventListener('click', function (e) {
-                        e.preventDefault();
-                        const targetPage = e.target.getAttribute('href');
-                        history.pushState({ page: targetPage }, '', targetPage);
-                        loadPage(targetPage);
-                    });
+    function loadContent(id, pushState = true) {
+        const targetElement = document.getElementById(id);
+        if (targetElement) {
+            // Hide all articles
+            const articles = mainContent.querySelectorAll('article');
+            articles.forEach(article => article.style.display = 'none');
+
+            // Show the target article
+            targetElement.style.display = 'block';
+
+            if (pushState) {
+                history.pushState({ id: id }, '', `#${id}`);
+            }
+
+            // If we're loading a subpage, add a "Back to Data Analytics" button
+            if (id !== 'datasci') {
+                const backButton = document.createElement('button');
+                backButton.textContent = 'Back to Data Analytics';
+                backButton.addEventListener('click', function() {
+                    loadContent('datasci');
                 });
-            })
-            .catch(error => console.error('Error loading page:', error));
+                targetElement.insertBefore(backButton, targetElement.firstChild);
+            }
+        }
     }
 });
 </script>
