@@ -477,7 +477,7 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 
 		<script>
 document.addEventListener('DOMContentLoaded', function () {
-    const main = document.getElementById('main');
+    const main = document.querySelector('main');
     const wrapper = document.getElementById('wrapper');
 
     // Add click event to each button in the data analytics section
@@ -490,52 +490,35 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // Handle browser back/forward buttons
-    window.addEventListener('popstate', function (e) {
-        if (e.state && e.state.id) {
-            showContent(e.state.id, false);
+    function showContent(id) {
+        // Use the existing site's navigation function
+        location.hash = '#' + id;
+    }
+
+    // Add "Back to Data Analytics" button to subpages
+    const subpages = ['characteristics', 'survival', 'datavis'];
+    subpages.forEach(subpage => {
+        const article = document.getElementById(subpage);
+        if (article && !article.querySelector('.back-button')) {
+            const backButton = document.createElement('button');
+            backButton.textContent = 'Back to Data Analytics';
+            backButton.className = 'back-button';
+            backButton.addEventListener('click', function(e) {
+                e.preventDefault();
+                showContent('datasci');
+            });
+            article.insertBefore(backButton, article.firstChild);
         }
     });
 
-    function showContent(id, pushState = true) {
-        // Hide all articles
-        const articles = main.querySelectorAll('article');
-        articles.forEach(article => article.style.display = 'none');
-
-        // Show the target article
-        const targetArticle = document.getElementById(id);
-        if (targetArticle) {
-            targetArticle.style.display = 'block';
-
-            // Add "Back to Data Analytics" button if not already present
-            if (id !== 'datasci' && !targetArticle.querySelector('.back-button')) {
-                const backButton = document.createElement('button');
-                backButton.textContent = 'Back to Data Analytics';
-                backButton.className = 'back-button';
-                backButton.addEventListener('click', function() {
-                    showContent('datasci');
-                });
-                targetArticle.insertBefore(backButton, targetArticle.firstChild);
-            }
-
-            if (pushState) {
-                history.pushState({ id: id }, '', `#${id}`);
-            }
-
-            // Ensure the wrapper is visible
-            wrapper.classList.remove('is-article-visible');
-            setTimeout(() => {
-                wrapper.classList.add('is-article-visible');
-            }, 325);
-        }
-    }
-
-    // Handle clicks on the close button
+    // Modify the existing close buttons to return to Data Analytics
     const closeButtons = document.querySelectorAll('.close');
     closeButtons.forEach(button => {
         button.addEventListener('click', function(e) {
-            e.preventDefault();
-            wrapper.classList.remove('is-article-visible');
+            if (subpages.includes(location.hash.substring(1))) {
+                e.preventDefault();
+                showContent('datasci');
+            }
         });
     });
 });
