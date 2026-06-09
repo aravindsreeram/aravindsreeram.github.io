@@ -1705,10 +1705,15 @@ input, select, textarea {
 
 .output-preview {
 	margin-top: 1rem;
+	text-align: center;
 }
 
 .output-preview img {
-	width: 100%;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: auto;
+	max-width: 100%;
 	max-height: 650px;
 	object-fit: contain;
 	border-radius: 0.35rem;
