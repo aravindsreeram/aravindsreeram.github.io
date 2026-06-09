@@ -1779,3 +1779,23 @@ input, select, textarea {
 		margin: 0 auto 1.5rem auto;
 	}
 }
+
+
+/* Remove HTML5UP image overlay/shadow from headshot */
+.headshot:before {
+	display: none !important;
+	background: none !important;
+	opacity: 0 !important;
+}
+
+.headshot {
+	box-shadow: none !important;
+	background: transparent !important;
+	border: none !important;
+}
+
+.headshot img {
+	box-shadow: none !important;
+	border: none !important;
+	border-radius: 0.35rem;
+}
