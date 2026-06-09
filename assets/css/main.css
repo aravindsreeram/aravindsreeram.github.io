@@ -1722,7 +1722,7 @@ input, select, textarea {
 	padding: 0.5rem;
 }
 
-/* Center images inside analytic output dropdown cards */
+/* Center and constrain analytic output images */
 .output-card .output-preview {
 	display: flex !important;
 	justify-content: center !important;
@@ -1733,13 +1733,28 @@ input, select, textarea {
 
 .output-card .output-preview img {
 	display: block !important;
-	width: 92% !important;
-	max-width: 92% !important;
 	height: auto !important;
-	margin: 0 auto !important;
+	max-height: 650px !important;
 	object-fit: contain !important;
 	border-radius: 0.35rem;
 	border: solid 1px rgba(255, 255, 255, 0.2);
 	background: #ffffff;
 	padding: 0.5rem;
+	box-sizing: border-box;
+}
+
+/* Tall tables */
+.output-card .output-preview img[src*="PortfolioTable"] {
+	width: 92% !important;
+	max-width: 92% !important;
+}
+
+/* Wider plots */
+.output-card .output-preview img[src*="coxregression"],
+.output-card .output-preview img[src*="forestplot"],
+.output-card .output-preview img[src*="testkmgraph"],
+.output-card .output-preview img[src*="roccurve"],
+.output-card .output-preview img[src*="logistic_lnr"] {
+	width: 86% !important;
+	max-width: 86% !important;
 }
